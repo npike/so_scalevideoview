@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sample.MainActivity" >
+
+    <Button
+        android:id="@+id/buttonStartVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_video" />
+
+    <Button
+        android:id="@+id/buttonStartVideoScale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonStartVideo"
+        android:text="@string/start_video_w_scaling" />
+    
+    <Button
+        android:id="@+id/buttonStartVideoInline"
+        android:layout_below="@+id/buttonStartVideoScale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_video_inline" />
+
+    <com.github.pedrovgs.DraggableView
+        android:id="@+id/draggable_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:bottom_view_id="@+id/placeholder_details"
+        app:top_view_id="@+id/fragment_placeholder_video"
+        app:top_view_margin_bottom="@dimen/top_fragment_margin"
+        app:top_view_margin_right="@dimen/top_fragment_margin"
+        app:top_view_x_scale_factor="@dimen/x_scale_factor"
+        app:top_view_y_scale_factor="@dimen/y_scale_factor" >
+
+        <FrameLayout
+            android:id="@+id/placeholder_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/fragment_placeholder_video"
+            android:background="#CCCCCC" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ipsum" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_placeholder_video"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentTop="true"
+            android:background="#FF0000" >
+        </FrameLayout>
+    </com.github.pedrovgs.DraggableView>
+
+    <com.github.pedrovgs.DraggableView
+        android:id="@+id/draggable_view_inline"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:bottom_view_id="@+id/placeholder_details_inline"
+        app:top_view_id="@+id/videoview_placeholder_video_inline"
+        app:top_view_margin_bottom="@dimen/top_fragment_margin"
+        app:top_view_margin_right="@dimen/top_fragment_margin"
+        app:top_view_x_scale_factor="@dimen/x_scale_factor"
+        app:top_view_y_scale_factor="@dimen/y_scale_factor" >
+
+        <FrameLayout
+            android:id="@+id/placeholder_details_inline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/fragment_placeholder_video"
+            android:background="#CCCCCC" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ipsum" />
+        </FrameLayout>
+
+        <VideoView
+            android:id="@+id/videoview_placeholder_video_inline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center" />
+    </com.github.pedrovgs.DraggableView>
+
+</RelativeLayout>

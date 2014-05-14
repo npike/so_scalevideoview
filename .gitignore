@@ -1,0 +1,6 @@
+bin
+.metadata
+gen
+.DS_Store
+.settings
+*.sqlite

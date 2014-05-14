@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sample</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="start_video">Start Video</string>
+    <string name="ipsum">Bacon ipsum dolor sit amet shank ham biltong ground round cow meatball chuck tongue filet mignon jowl brisket. Sirloin beef bresaola jowl. Filet mignon fatback pastrami pork ground round spare ribs andouille pig ribeye pork belly short loin beef ribs bacon. Boudin ribeye kielbasa ball tip turkey.</string>
+    <string name="start_video_w_scaling">Start Video w/scaling</string>
+    <string name="start_video_inline">Start Video inline</string>
+    <string name="hls_test_url">https://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8</string>
+
+</resources>
