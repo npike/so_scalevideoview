@@ -1,6 +1,4 @@
-Example project to demonstrate scaling problem with VideoView when using the DraggablePanel library for the Stackoverflow question:
-
-[VideoView doesn't scale content to match its parent](http://stackoverflow.com/questions/23663580/videoview-doesnt-scale-content-to-match-its-parent)
+Example project to demonstrate scaling problem with VideoView when using the DraggablePanel library for the Stackoverflow question: [VideoView doesn't scale content to match its parent](http://stackoverflow.com/questions/23663580/videoview-doesnt-scale-content-to-match-its-parent)
 
 DraggablePanel: https://github.com/pedrovgs/DraggablePanel
 
