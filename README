@@ -2,7 +2,6 @@ Example project to demonstrate scaling problem with VideoView when using the Dra
 
 [VideoView doesn't scale content to match its parent](http://stackoverflow.com/questions/23663580/videoview-doesnt-scale-content-to-match-its-parent)
 
-
 DraggablePanel: https://github.com/pedrovgs/DraggablePanel
 
-The draggablepanel included in this sample is a modified version of the DraggablePanel library so that it can be used in Eclipse and without dependency on nine-old-android.  I have also added a callback to capture the scale of the dragView as the user performs the minimize/maximize gesture.
+The DraggablePanel included in this sample is a modified version of the DraggablePanel library so that it can be used in Eclipse and without dependency on nine-old-android.  I have also added a callback to capture the scale of the dragView as the user performs the minimize/maximize gesture.
