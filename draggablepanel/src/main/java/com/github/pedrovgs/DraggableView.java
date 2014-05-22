@@ -68,6 +68,7 @@ public class DraggableView extends RelativeLayout {
 	private int lastLeftPosition;
 	private int mMaximizedDragViewHeight;
 	private int mMaximizedDragViewWidth;
+	private DraggableViewCallback draggableViewCallback;
 
 	public DraggableView(Context context) {
 		super(context);
@@ -82,6 +83,14 @@ public class DraggableView extends RelativeLayout {
 	public DraggableView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		initializeAttributes(attrs);
+	}
+	
+	public void setDragEnabled(boolean enabled) {
+		draggableViewCallback.setDragEnabled(enabled);
+	}
+	
+	public boolean isDragEnabled() {
+		return draggableViewCallback.isDragEnabled();
 	}
 
 	/**
@@ -561,8 +570,9 @@ public class DraggableView extends RelativeLayout {
 	 * Initialize the viewDragHelper.
 	 */
 	private void initializeViewDragHelper() {
+		draggableViewCallback = new DraggableViewCallback(this, dragView);
 		viewDragHelper = ViewDragHelper.create(this, SENSITIVITY,
-				new DraggableViewCallback(this, dragView));
+				draggableViewCallback);
 	}
 
 	/**

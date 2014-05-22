@@ -170,11 +170,15 @@ public class MainActivity extends FragmentActivity implements DraggableListener 
 					LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 			mFrameLayoutVideoWrap.setLayoutParams(fullscreenParams);
 			mFrameLayoutVideoWrap.requestLayout();
+			
+			mDraggableView.setDragEnabled(false);
 		} else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
 			// Restore original layoutparams when returning to a portrait
 			// orientation
 			mFrameLayoutVideoWrap.setLayoutParams(paramsNotFullscreen);
 			mFrameLayoutVideoWrap.getParent().requestLayout();
+			
+			mDraggableView.setDragEnabled(true);
 		}
 	}
 

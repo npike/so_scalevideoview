@@ -33,6 +33,7 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
 
     private DraggableView draggableView;
     private View draggedView;
+	private boolean mIsDragEnabled = true;
 
     /**
      * Main constructor.
@@ -43,6 +44,14 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
     public DraggableViewCallback(DraggableView draggableView, View draggedView) {
         this.draggableView = draggableView;
         this.draggedView = draggedView;
+    }
+    
+    public void setDragEnabled(boolean enabled) {
+    	mIsDragEnabled = enabled;
+    }
+    
+    public boolean isDragEnabled() {
+    	return mIsDragEnabled;
     }
 
     /**
@@ -97,10 +106,13 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
      * @param pointerId ID of the pointer attempting the capture,
      * @return true if capture should be allowed, false otherwise.
      */
-    @Override
     public boolean tryCaptureView(View view, int pointerId) {
-        return view.equals(draggedView);
-    }
+		if (mIsDragEnabled) {
+			return view.equals(draggedView);
+		} else {
+			return false;
+		}
+	}
 
     /**
      * Override method used to configure the horizontal drag. Restrict the motion of the dragged child view along the
