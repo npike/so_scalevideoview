@@ -16,7 +16,6 @@
 package com.github.pedrovgs;
 
 import android.support.v4.widget.ViewDragHelper;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -31,7 +30,6 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
     private static final int MINIMUM_DY_FOR_VERTICAL_DRAG = 15;
     private static final float X_MIN_VELOCITY = 1300;
     private static final float Y_MIN_VELOCITY = 1300;
-	private static final String TAG = "DraggableViewCallback";
 
     private DraggableView draggableView;
     private View draggedView;
@@ -58,13 +56,10 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
      */
     @Override
     public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-    	Log.d(TAG, "onViewPositionChanged");
         draggableView.updateLastDragViewPosition(top, left);
         if (draggableView.isDragViewAtBottom()) {
-        	Log.d(TAG, "dragView is at bottom, so changeDragViewViewAlpha");
             draggableView.changeDragViewViewAlpha();
         } else {
-        	Log.d(TAG, "dragView is NOT at bottom, so change properties to animate");
             draggableView.changeDragViewScale();
             draggableView.changeDragViewPosition();
             draggableView.changeSecondViewAlpha();
@@ -72,7 +67,6 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
             draggableView.changeBackgroundAlpha();
         }
         
-        Log.d(TAG, "invalidated dragview");
         draggableView.invalidate();
     }
 
@@ -105,7 +99,6 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
      */
     @Override
     public boolean tryCaptureView(View view, int pointerId) {
-    	Log.d("asd", "tryCaptureView "+view.equals(draggedView));
         return view.equals(draggedView);
     }
 
@@ -120,7 +113,6 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
      */
     @Override
     public int clampViewPositionHorizontal(View child, int left, int dx) {
-    	Log.d("Drag", "left: "+left + " dx: "+dx);
         int newLeft = draggableView.getWidth() - child.getWidth();
         if ((draggableView.isMinimized() && Math.abs(dx) > MINIMUN_DX_FOR_HORIZONTAL_DRAG) || (draggableView.isDragViewAtBottom() && !draggableView.isDragViewAtRight())) {
             newLeft = left;
@@ -155,12 +147,9 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
      * @param yVel
      */
     private void triggerOnReleaseActionsWhileVerticalDrag(float yVel) {
-    	Log.d(TAG, "triggerOnReleaseActionsWhileVerticalDrag");
         if (yVel < 0 && yVel <= -Y_MIN_VELOCITY) {
-        	Log.d(TAG, "maximize due to velocity");
             draggableView.maximize();
         } else if (yVel > 0 && yVel >= Y_MIN_VELOCITY) {
-        	Log.d(TAG, "minimize due to velocity");
             draggableView.minimize();
         } else {
             if (draggableView.isDragViewAboveTheMiddle()) {
@@ -177,22 +166,16 @@ class DraggableViewCallback extends ViewDragHelper.Callback {
      * @param xVel
      */
     private void triggerOnReleaseActionsWhileHorizontalDrag(float xVel) {
-    	Log.d(TAG, "triggerOnReleaseActionsWhileHorizontalDrag velocity="+xVel);
         if (xVel < 0 && xVel <= X_MIN_VELOCITY) {
-        	Log.d(TAG, "closeToLeft due to velocity.");
             draggableView.closeToLeft();
         } else if (xVel > 0 && xVel >= X_MIN_VELOCITY) {
-        	Log.d(TAG, "closeToRight due to velocity.");
             draggableView.closeToRight();
         } else {
             if (draggableView.isNextToLeftBound()) {
-            	Log.d(TAG, "closeToLeft due to isNextToLeftBound.");
                 draggableView.closeToLeft();
             } else if (draggableView.isNextToRightBound()) {
-            	Log.d(TAG, "closeToRight due to isNextToRightBound.");
                 draggableView.closeToRight();
             } else {
-            	Log.d(TAG, "minimize for random reason");
                 draggableView.minimize();
             }
         }

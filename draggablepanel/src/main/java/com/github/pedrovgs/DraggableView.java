@@ -24,7 +24,6 @@ import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -47,7 +46,6 @@ public class DraggableView extends RelativeLayout {
 	private static final boolean DEFAULT_ENABLE_HORIZONTAL_ALPHA_EFFECT = true;
 	private static final int ONE_HUNDRED = 100;
 	private static final float SENSITIVITY = 1f;
-	private static final String TAG = "DraggableView";
 
 	private View dragView;
 	private View secondView;
@@ -180,7 +178,6 @@ public class DraggableView extends RelativeLayout {
 	 * initial position.
 	 */
 	public void maximize() {
-		Log.d(TAG, "maximize");
 		smoothSlideTo(SLIDE_TOP);
 		notifyMaximizeToListener();
 	}
@@ -190,7 +187,6 @@ public class DraggableView extends RelativeLayout {
 	 * the bottom right corner of the screen.
 	 */
 	public void minimize() {
-		Log.d(TAG, "minimize");
 		smoothSlideTo(SLIDE_BOTTOM);
 		notifyMinimizeToListener();
 	}
@@ -326,9 +322,7 @@ public class DraggableView extends RelativeLayout {
 			int bottom) {
 		int newTop = this.topViewHeight == DEFAULT_TOP_VIEW_HEIGHT ? dragView
 				.getMeasuredHeight() : (int) this.topViewHeight;
-				
-		Log.d(TAG, "onLayout left: "+lastLeftPosition + " top: "+lastTopPosition + " newTop: "+newTop + " width: "+dragView.getMeasuredWidth());
-				
+
 		dragView.layout(lastLeftPosition, lastTopPosition, lastLeftPosition
 				+ dragView.getMeasuredWidth(), lastTopPosition + newTop);
 		secondView.layout(0, lastTopPosition + newTop, right, lastTopPosition
@@ -391,9 +385,7 @@ public class DraggableView extends RelativeLayout {
 	 * @param lastLeftPosition
 	 */
 	void updateLastDragViewPosition(int lastTopPosition, int lastLeftPosition) {
-		Log.d(TAG, "updateLastDragViewPosition: lastTop: "+lastTopPosition + " lastLeft: "+lastLeftPosition);
 		this.lastTopPosition = lastTopPosition;
-//		this.lastLeftPosition = getWidth() - dragView.getWidth();
 		this.lastLeftPosition = lastLeftPosition;
 	}
 
@@ -402,16 +394,13 @@ public class DraggableView extends RelativeLayout {
 	 * simulate a horizontal displacement while the view is dragged..
 	 */
 	void changeDragViewPosition() {
-		
+
 		if (mMaximizedDragViewHeight == 0) {
 			mMaximizedDragViewHeight = dragView.getHeight();
 		}
 		if (mMaximizedDragViewWidth == 0) {
 			mMaximizedDragViewWidth = dragView.getWidth();
 		}
-		
-		Log.d(TAG, "setPivotX: " + mMaximizedDragViewWidth);
-		Log.d(TAG, "setPivotY: " + mMaximizedDragViewHeight);
 
 		dragView.setPivotX(mMaximizedDragViewWidth - getDragViewMarginRight());
 		dragView.setPivotY(mMaximizedDragViewHeight - getDragViewMarginBottom());
@@ -422,7 +411,6 @@ public class DraggableView extends RelativeLayout {
 	 */
 	void changeSecondViewPosition() {
 		secondView.setY(dragView.getBottom());
-		//secondView.setX(dragView.getLeft());
 	}
 
 	/**
@@ -430,8 +418,6 @@ public class DraggableView extends RelativeLayout {
 	 * the scale factor.
 	 */
 	void changeDragViewScale() {
-//		dragView.setScaleX(1 - getVerticalDragOffset() / xScaleFactor);
-//		dragView.setScaleY(1 - getVerticalDragOffset() / yScaleFactor);
 
 		if (listener != null) {
 			listener.onDraggableViewScaleChanged(1 - getVerticalDragOffset()
@@ -463,13 +449,13 @@ public class DraggableView extends RelativeLayout {
 	 * is being horizontally dragged.
 	 */
 	void changeDragViewViewAlpha() {
-//		if (enableHorizontalAlphaEffect) {
-//			float alpha = 1 - getHorizontalDragOffset();
-//			if (alpha == 0) {
-//				alpha = 1;
-//			}
-//			dragView.setAlpha(alpha);
-//		}
+		// if (enableHorizontalAlphaEffect) {
+		// float alpha = 1 - getHorizontalDragOffset();
+		// if (alpha == 0) {
+		// alpha = 1;
+		// }
+		// dragView.setAlpha(alpha);
+		// }
 	}
 
 	/**
@@ -479,7 +465,6 @@ public class DraggableView extends RelativeLayout {
 	 *         false if is below.
 	 */
 	boolean isDragViewAboveTheMiddle() {
-		Log.d(TAG, "isDragViewAboveTheMiddle: "+dragView.getHeight() + " " + mMaximizedDragViewHeight + " y:"+dragView.getY());
 		int viewHeight = getHeight();
 		float viewHeaderY = dragView.getY() + (dragView.getHeight() * HALF);
 		return viewHeaderY < (viewHeight * HALF);
@@ -533,7 +518,6 @@ public class DraggableView extends RelativeLayout {
 	 *         height.
 	 */
 	boolean isDragViewAtBottom() {
-		Log.d(TAG, "isDragViewAtBottom dragViewBottom: "+dragView.getBottom() + " containerHeight: "+getHeight());
 		return dragView.getBottom() == getHeight();
 	}
 
@@ -628,14 +612,14 @@ public class DraggableView extends RelativeLayout {
 	private boolean smoothSlideTo(float slideOffset) {
 		final int topBound = getPaddingTop();
 		int y = (int) (topBound + slideOffset * getVerticalDragRange());
-		
-		int x =  (int) (mMaximizedDragViewWidth *  (1 - 1 / xScaleFactor));
-		
+
+		// calculate an x position to animate to if we are sliding to the bottom
+		// of the screen.
+		int x = (int) (mMaximizedDragViewWidth * (1 - 1 / xScaleFactor));
+
 		if (slideOffset == SLIDE_TOP) {
 			x = 0;
-		} 
-		
-		Log.d(TAG, "smoothSlideTo x: "+x + " y: "+y);
+		}
 
 		if (viewDragHelper.smoothSlideViewTo(dragView, x, y)) {
 			ViewCompat.postInvalidateOnAnimation(this);
@@ -684,8 +668,7 @@ public class DraggableView extends RelativeLayout {
 	 * @return the difference between the custom view height and the dragged
 	 *         view height.
 	 */
-	private float getVerticalDragRange() {
-//		Log.d(TAG, "getVerticalDragRange() viewHeight: "+mMaximizedDragViewHeight + " dragRange: "+(getHeight() - mMaximizedDragViewHeight));
+	private float getVerticalDragRange() { 
 		return getHeight() - (mMaximizedDragViewHeight / xScaleFactor);
 	}
 
