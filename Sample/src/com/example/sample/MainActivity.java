@@ -1,13 +1,14 @@
 package com.example.sample;
 
+import net.npike.draggableviewtools.DragVideoView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.VideoView;
 
 import com.example.sample.fragment.ScalableVideoFragment;
 import com.example.sample.fragment.SimpleVideoFragment;
@@ -17,13 +18,14 @@ import com.github.pedrovgs.DraggableView;
 public class MainActivity extends FragmentActivity implements DraggableListener {
 
 	private static final String TAG_FRAG_SIMPLEVIDEO = "frag_simplevideo";
+	protected static final String TAG = "MainActivity";
 	private DraggableView mDraggableView;
 	private Button mButtonStartVideo;
 	private Button mButtonStartVideoScale;
 	private Fragment mFragmentVideo;
 	private DraggableView mDraggableViewVideoInline;
 	private Button mButtonStartVideoInline;
-	private VideoView mVideoViewInline;
+	private DragVideoView mVideoViewInline;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class MainActivity extends FragmentActivity implements DraggableListener 
 		mButtonStartVideoInline = (Button) findViewById(R.id.buttonStartVideoInline);
 		mDraggableView = (DraggableView) findViewById(R.id.draggable_view);
 		mDraggableViewVideoInline = (DraggableView) findViewById(R.id.draggable_view_inline);
-		mVideoViewInline = (VideoView) findViewById(R.id.videoview_placeholder_video_inline);
+		mVideoViewInline = (DragVideoView) findViewById(R.id.videoview_placeholder_video_inline);
 
 		mButtonStartVideo.setOnClickListener(new OnClickListener() {
 
@@ -83,6 +85,39 @@ public class MainActivity extends FragmentActivity implements DraggableListener 
 		});
 
 		mDraggableView.setDraggableListener(this);
+		
+		mDraggableViewVideoInline.setDraggableListener(new DraggableListener() {
+			
+			private int mMaxVideoWidth;
+			private int mMaxVideoHeight;
+
+			@Override
+			public void onMinimized() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onMaximized() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onDraggableViewScaleChanged(float scaleX, float scaleY) {
+	            mVideoViewInline.changeVideoSize(scaleX, scaleY);
+			}
+			
+			@Override
+			public void onClosedToRight() {
+				Log.d(TAG, "onClosedToRight");
+			}
+			
+			@Override
+			public void onClosedToLeft() {
+				Log.d(TAG, "onClosedToLeft");				
+			}
+		});
 
 		mDraggableView.setVisibility(View.GONE);
 		mDraggableView.closeToRight();

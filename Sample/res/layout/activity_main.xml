@@ -83,12 +83,11 @@
                 android:text="@string/ipsum" />
         </FrameLayout>
 
-        <VideoView
+        
+        <net.npike.draggableviewtools.DragVideoView
             android:id="@+id/videoview_placeholder_video_inline"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center" />
+            android:layout_height="match_parent"  />
     </com.github.pedrovgs.DraggableView>
 
 </RelativeLayout>

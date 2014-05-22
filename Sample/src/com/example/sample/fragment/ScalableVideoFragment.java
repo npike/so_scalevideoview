@@ -52,7 +52,6 @@ public class ScalableVideoFragment extends Fragment implements
 	}
 
 	public void setVideoViewScale(float scaleX, float scaleY) {
-		Log.d(TAG, "scaleX: " + scaleX + " scaleY: " + scaleY);
 		if (mMaxVideoWidth == 0) {
 			mMaxVideoWidth = mVideoView.getWidth();
 		}
