@@ -42,4 +42,8 @@ public class SimpleVideoFragment extends Fragment implements OnPreparedListener 
 	public void onPrepared(MediaPlayer mp) {
 		mProgressBarVideo.setVisibility(View.GONE);
 	}
+	
+	public void onStopPlayback(){
+		mVideoView.stopPlayback();
+	}
 }

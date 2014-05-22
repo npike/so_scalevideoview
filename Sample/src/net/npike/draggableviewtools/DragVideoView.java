@@ -23,13 +23,6 @@ public class DragVideoView extends VideoView{
 	public DragVideoView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
-	
-//	@Override
-//	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//		
-//		Log.d(TAG, "onMeasure "+getMeasuredHeight());
-//	}
 
 	public void changeVideoSize(float scaleY, float scaleX) {
 		if (mMaxVideoWidth == 0) {
@@ -44,7 +37,7 @@ public class DragVideoView extends VideoView{
 		params.height = (int) (mMaxVideoHeight * scaleY);
 		params.width = (int) (mMaxVideoWidth * scaleX);
 		
-		Log.d("DragVideoView", "newHeight: "+params.height + " newWidth: "+params.width);
+		Log.d(TAG, "newHeight: "+params.height + " newWidth: "+params.width);
 
 		setLayoutParams(params);
 	}

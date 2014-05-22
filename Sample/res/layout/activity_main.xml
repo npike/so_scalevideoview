@@ -13,15 +13,8 @@
         android:text="@string/start_video" />
 
     <Button
-        android:id="@+id/buttonStartVideoScale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonStartVideo"
-        android:text="@string/start_video_w_scaling" />
-    
-    <Button
         android:id="@+id/buttonStartVideoInline"
-        android:layout_below="@+id/buttonStartVideoScale"
+        android:layout_below="@+id/buttonStartVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_video_inline" />
@@ -50,13 +43,13 @@
                 android:text="@string/ipsum" />
         </FrameLayout>
 
-        <FrameLayout
+        <com.github.pedrovgs.DragFrameLayout
             android:id="@+id/fragment_placeholder_video"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_alignParentTop="true"
             android:background="#FF0000" >
-        </FrameLayout>
+        </com.github.pedrovgs.DragFrameLayout>
     </com.github.pedrovgs.DraggableView>
 
     <com.github.pedrovgs.DraggableView
