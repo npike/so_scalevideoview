@@ -422,7 +422,7 @@ public class DraggableView extends RelativeLayout {
 	 */
 	void changeSecondViewPosition() {
 		secondView.setY(dragView.getBottom());
-		secondView.setX(dragView.getLeft());
+		//secondView.setX(dragView.getLeft());
 	}
 
 	/**

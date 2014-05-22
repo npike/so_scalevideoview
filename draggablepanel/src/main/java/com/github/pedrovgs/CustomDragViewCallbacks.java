@@ -1,6 +1,6 @@
-package net.npike.draggableviewtools;
+package com.github.pedrovgs;
 
-public interface CustomDragView {
+public interface CustomDragViewCallbacks {
 	
 	public void onChangeDragViewScale(float scaleX, float scaleY);
 	

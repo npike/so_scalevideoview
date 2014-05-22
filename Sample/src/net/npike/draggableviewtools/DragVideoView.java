@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.VideoView;
 
-public class DragVideoView extends VideoView implements CustomDragView{
+public class DragVideoView extends VideoView{
 
 	private static final String TAG = "DragVideoView";
 	private int mMaxVideoWidth;
@@ -50,36 +50,6 @@ public class DragVideoView extends VideoView implements CustomDragView{
 	}
 
  
-
-	@Override
-	public void onChangeDragViewScale(float scaleX, float scaleY) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public float getMaximumWidth() {
-		// TODO Auto-generated method stub
-		return mMaxVideoWidth;
-	}
-
-	@Override
-	public float getMaximumHeight() {
-		// TODO Auto-generated method stub
-		return mMaxVideoHeight;
-	}
-
-	@Override
-	public float getMinimizedWidth(float scaleFactor) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMinimizedHeight(float scaleFactor) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	 
+ 
 
 }
